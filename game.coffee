@@ -78,7 +78,6 @@ class Snake
       canvas.fillStyle = "#E3D000"
       canvas.fill()
 
-
 class SnakeGame
   constructor: (@canvas, @hud, @width = 800, @height = 600, @sprite_size = 10, @fps = 20) ->
     console.log "Game created!"
@@ -90,8 +89,6 @@ class SnakeGame
     @food =
       x: Math.ceil(Math.random() * @cols) - 1
       y: Math.ceil(Math.random() * @rows) - 1
-
-
 
   start: =>
     return false unless @lost
