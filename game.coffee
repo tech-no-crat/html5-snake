@@ -5,7 +5,7 @@ $( ->
 startGame = ->
   console.log "Starting..."
   
-  _.templateSettings.interpolate = /\{\{(.+?)\}\}/g
+  #_.templateSettings.interpolate = /\{\{(.+?)\}\}/g
 
   canvas = $("#game canvas")[0].getContext("2d")
   game = new SnakeGame(canvas, $("#game #hud"), 800, 400, 10, 10)
@@ -100,12 +100,23 @@ class SnakeGame
     @lost = false
     @redrawHud = true
     @score = 0
+    @loadHighscore()
     @then = Date.now()
     @snake = new Snake(this, 5, 5)
     addEventListener("keydown", @keyDown)
     
     @gameLoop()
     return true
+
+  loadHighscore: =>
+   @highscore = localStorage.getItem("highscore")
+   if isNaN(@highscore) or @highscore == null
+     @highscore = 0
+     localStorage.setItem("highscore", 0)
+
+  saveHighscore: =>
+    @highscore = @score if @score > @highscore or isNaN(@highscore)
+    localStorage.setItem("highscore", @highscore)
 
   gameLoop: =>
     now = Date.now()
@@ -126,10 +137,12 @@ class SnakeGame
     unless @lost
       @hud.html _.template($("#templates #hud #playing").html(),
         score: @score
+        highscore: @highscore
       )
     else
       @hud.html _.template($("#templates #hud #lost").html(),
         score: @score
+        highscore: @highscore
       )
       $("button#restart").click(@start)
 
@@ -139,6 +152,8 @@ class SnakeGame
     if not @snake.alive
       @lost = true
       @redrawHud = true
+      @saveHighscore()
+
       return false
 
     @snake.update(@delta)

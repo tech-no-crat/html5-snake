@@ -1,7 +1,3 @@
-#templates {
-  display: none;
-}
-
 a {
   text-decoration: none;
   color: #1972BF;
@@ -27,27 +23,52 @@ body {
       height: 60px;
       width: 800px;
       border-bottom: 1px solid black;
-      font-size: 38px;
-      line-height: 60px;
       
-      span#score-label {
-        padding-left: 10px;
+      #left {
+        float: left;
+        height: inherit;
+        width: 595px;
       }
 
-      #lost-text {
-        font-size: 20px;
-        line-height: 20px;
-        width: 100%;
-        text-align: center;
+      #right {
+        float: right;
+        height: inherit;
+        width: 200px;
+      }
+
+      #scores {
+        margin-left: 10px;
+        display: inline-block;
+
+        #score {
+          height: 40px; 
+          line-height: 40px;
+          font-size: 36px;
+        }
+
+        #highscore {
+          height: 20px;
+          line-height: 20px;
+          font-size: 16px;
+          width: 100%;
+          text-align: center;
+        }
+      }
+
+      #new-highscore {
+        margin-left: 10px;
+        font-size: 38px;
+        line-height: 60px;
       }
 
       button#restart {
         display: block;
         margin: 0 auto;
-        margin-top: 5px;
         font-size: 20px;
+        margin-top: 15px;
+        margin-right: 10px;
         height: 30px;
-        width: 200px;
+        width: 180px;
         border-radius: 15px;
         background-color: #C7EBED;
         border-color: #4B5859;

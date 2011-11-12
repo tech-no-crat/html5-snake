@@ -11,15 +11,33 @@
 
     #templates
       #hud
-        #playing
-          %span#score-label Score:
-          %span#score-value {{ score }}
-        #lost
-          #lost-text
-            Loser! your score is 
-            %span#score-value {{ score }}
-            %button#restart Play again!
+        %script{"id" => "playing", "type" => "text/html"}
+          #scores
+            #score
+              %span#score-label Score:
+              %span#score-value <%= score %>
+            #highscore
+              %span#highscore-label Highscore:
+              %span#highscore-value <%= highscore %>
 
+        %script{"id" => "lost", "type" => "text/html"}
+          #left
+            <% if(highscore>score) { %>
+            #scores
+              #score
+                %span#score-label Loser! Score: 
+                %span#score-value <%= score %>
+              #highscore
+                %span#highscore-label Highscore:
+                %span#highscore-value <%= highscore %>
+            <% } else { %>
+            #new-highscore
+              %span#new-highscore-label New highscore:
+              %span#new-highscore-value <%= highscore %>
+            <% } %>
+          #right
+            %button#restart Play again!
+ 
   %body
     #content
       %h1.title Snake!
